@@ -20,7 +20,7 @@ parser.add_argument('--video', help='Path to video file.')
 args = parser.parse_args()
 
 # Load names of classes
-classesFile = "classes.names"
+classesFile = "../model/classes.names"
 
 classes = None
 with open(classesFile, 'rt') as f:
@@ -28,8 +28,8 @@ with open(classesFile, 'rt') as f:
 
 # Give the configuration and weight files for the model and load the network using them.
 
-modelConfiguration = "darknet-yolov3.cfg"
-modelWeights = "model.weights"
+modelConfiguration = "../model/config/darknet-yolov3.cfg"
+modelWeights = "../model/weights/model.weights"
 
 net = cv.dnn.readNetFromDarknet(modelConfiguration, modelWeights)
 net.setPreferableBackend(cv.dnn.DNN_BACKEND_OPENCV)
