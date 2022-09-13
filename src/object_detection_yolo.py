@@ -51,7 +51,7 @@ def getOutputsNames(net):
 def drawPred(classId, conf, left, top, right, bottom):
     # Draw a bounding box.
     #    cv.rectangle(frame, (left, top), (right, bottom), (255, 178, 50), 3)
-    cv.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 3)
+    cv.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 7)
 
     label = '%.2f' % conf
 
@@ -62,13 +62,13 @@ def drawPred(classId, conf, left, top, right, bottom):
 
     # Display the label at the top of the bounding box
     labelSize, baseLine = cv.getTextSize(
-        label, cv.FONT_HERSHEY_SIMPLEX, 0.5, 1)
+        label, cv.FONT_HERSHEY_SIMPLEX, 1, 1)
     top = max(top, labelSize[1])
-    cv.rectangle(frame, (left, top - round(1.5*labelSize[1])), (left + round(
-        1.5*labelSize[0]), top + baseLine), (255, 0, 255), cv.FILLED)
+    cv.rectangle(frame, (left, top - round(1.7*labelSize[1])), (left + round(
+        1.3*labelSize[0]), top + baseLine), (255, 0, 255), cv.FILLED)
     #cv.rectangle(frame, (left, top - round(1.5*labelSize[1])), (left + round(1.5*labelSize[0]), top + baseLine),    (255, 255, 255), cv.FILLED)
     cv.putText(frame, label, (left, top),
-               cv.FONT_HERSHEY_SIMPLEX, 0.70, (255, 255, 255), 2)
+               cv.FONT_HERSHEY_SIMPLEX, 1.3, (255, 255, 255), 2)
 
 # Remove the bounding boxes with low confidence using non-maxima suppression
 
@@ -139,7 +139,6 @@ elif (args.image_dir):
         print("Input image dir ", args.image_dir, " doesn't exist")
         sys.exit(1)
     for image_path in [k for k in os.listdir(args.image_dir) if 'out_py' not in k]:
-        print(image_path)
         os.system('python object_detection_yolo.py --image={}'.format(os.path.join(args.image_dir, image_path)))
     sys.exit(1)
 elif (args.video):
