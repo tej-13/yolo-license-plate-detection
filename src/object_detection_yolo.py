@@ -16,6 +16,7 @@ inpHeight = 416  # 608     # Height of network's input image
 parser = argparse.ArgumentParser(
     description='Object Detection using YOLO in OPENCV')
 parser.add_argument('--image', help='Path to image file.')
+parser.add_argument('--image-dir', help='Path to directory containing images.')
 parser.add_argument('--video', help='Path to video file.')
 args = parser.parse_args()
 
@@ -133,6 +134,14 @@ if (args.image):
         sys.exit(1)
     cap = cv.VideoCapture(args.image)
     outputFile = args.image[:-4]+'_yolo_out_py.jpg'
+elif (args.image_dir):
+    if not os.path.isdir(args.image_dir):
+        print("Input image dir ", args.image_dir, " doesn't exist")
+        sys.exit(1)
+    for image_path in [k for k in os.listdir(args.image_dir) if 'out_py' not in k]:
+        print(image_path)
+        os.system('python object_detection_yolo.py --image={}'.format(os.path.join(args.image_dir, image_path)))
+    sys.exit(1)
 elif (args.video):
     # Open the video file
     if not os.path.isfile(args.video):
@@ -145,7 +154,7 @@ else:
     cap = cv.VideoCapture(0)
 
 # Get the video writer initialized to save the output video
-if (not args.image):
+if not (args.image):
     vid_writer = cv.VideoWriter(outputFile, cv.VideoWriter_fourcc('M', 'J', 'P', 'G'), 30, (round(
         cap.get(cv.CAP_PROP_FRAME_WIDTH)), round(cap.get(cv.CAP_PROP_FRAME_HEIGHT))))
 
