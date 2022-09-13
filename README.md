@@ -30,7 +30,7 @@ python object_detection_yolo.py --image-dir=./image-directory
 python object_detection_yolo.py --video=cars.mp4
 ```
 
-Test on the webcam:
+### Test on the webcam:
 
 ```
 python object_detection_yolo.py
