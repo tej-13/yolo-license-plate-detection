@@ -2,8 +2,6 @@
 
 License plate detection with Python and yolov3 !
 
-[![Watch the video](https://img.youtube.com/vi/NXjCJZxeaQA/0.jpg)](https://www.youtube.com/watch?v=NXjCJZxeaQA)
-
 ## 🔨 Environment
 
 - Python 3.8
